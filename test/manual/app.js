@@ -1,11 +1,13 @@
 var express = require('express'),
-    easy = require('../../lib/easy'),
+    bic = require('../../lib/easy')(),
     app = express.createServer(),
     staticServer = express.createServer();
 
 app.use(express.bodyParser());
-app.use(easy.middleware());
-app.get('/token-info', function(req, res) { res.send(req.user); });
+app.post('/token', bic.handleTokenRequest);
+app.get('/token-info', bic.accessToken, bic.fullCORS, function(req, res) {
+  res.send(req.user);
+});
 
 staticServer.use(express.static(__dirname));
 

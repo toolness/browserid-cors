@@ -13,8 +13,8 @@ function log(text) {
 $(window).ready(function() {
   $("#login").click(function() {
     navigator.id.get(function(assertion) {
-      log("POST http://localhost:3001/auth");
-      $.post("http://localhost:3001/auth", {
+      log("POST http://localhost:3001/token");
+      $.post("http://localhost:3001/token", {
         assertion: assertion
       }, function(info) {
         info = JSON.parse(info);
