@@ -1,5 +1,5 @@
 var express = require('express'),
-    easy = require('../../easy'),
+    easy = require('../../lib/easy'),
     app = express.createServer(),
     staticServer = express.createServer();
 

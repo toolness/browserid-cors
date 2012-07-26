@@ -1,5 +1,5 @@
 var expect = require('expect.js'),
-    tokens = require('../tokens');
+    tokens = require('../lib/tokens');
 
 describe("tokens.generateRandomString()", function() {
   it("should return a string w/ random characters", function(done) {

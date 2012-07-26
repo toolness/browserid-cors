@@ -1,7 +1,7 @@
 var expect = require('expect.js'),
     request = require('request'),
     express = require('express'),
-    auth = require('../auth');
+    auth = require('../lib/auth');
 
 var TEST_PORT = 4320;
 

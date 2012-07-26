@@ -1,5 +1,5 @@
 var expect = require('expect.js'),
-    LocalTokenStorage = require('../local-token-storage.js');
+    LocalTokenStorage = require('../lib/local-token-storage.js');
 
 describe("LocalTokenStorage", function() {
   it("should create tokens", function(done) {

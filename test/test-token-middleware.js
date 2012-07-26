@@ -1,7 +1,7 @@
 var expect = require('expect.js'),
     request = require('request'),
     express = require('express'),
-    TokenMiddleware = require('../token-middleware');
+    TokenMiddleware = require('../lib/token-middleware');
 
 describe("TokenMiddleware", function() {
   function req(method, accessToken, cb) {
