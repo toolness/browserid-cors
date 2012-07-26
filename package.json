@@ -1,0 +1,21 @@
+{
+  "name": "browserid-cors",
+  "version": "0.0.1",
+  "author": "Atul Varma <varmaa@gmail.com>",
+  "description": "browserid cors experiment",
+  "scripts": {
+    "test": "node_modules/.bin/mocha -R spec"
+  },
+  "dependencies" : {
+    "express": "2.5.x"
+  },
+  "devDependencies": {
+    "mocha": "1.3.x",
+    "request": "2.9.x",
+    "expect.js": "0.1.x"
+  },
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.8"
+  }
+}

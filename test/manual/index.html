@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>browserid cors test</title>
+<img id="login" src="https://browserid.org/i/sign_in_blue.png">
+<script src="http://zeptojs.com/zepto.min.js"></script>
+<script src="https://browserid.org/include.js"></script>
+<script>
+$(window).ready(function() {
+  $("#login").click(function() {
+    navigator.id.get(function(assertion) {
+      $.post("http://localhost:3000/auth", {
+        assertion: assertion
+      }, function(req) {
+        console.log("boop", JSON.parse(req));
+      });
+    });
+  });
+});
+</script>
