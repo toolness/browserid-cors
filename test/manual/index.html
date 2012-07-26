@@ -13,22 +13,22 @@ function log(text) {
 $(window).ready(function() {
   $("#login").click(function() {
     navigator.id.get(function(assertion) {
-      log("POST http://localhost:3000/auth");
-      $.post("http://localhost:3000/auth", {
+      log("POST http://localhost:3001/auth");
+      $.post("http://localhost:3001/auth", {
         assertion: assertion
       }, function(info) {
         info = JSON.parse(info);
-        var url = "http://localhost:3000/token-info?accessToken=" +
+        var url = "http://localhost:3001/token-info?accessToken=" +
                   info.accessToken;
         log("  -> " + JSON.stringify(info));
         log("GET " + url);
         $.get(url, function(tokenInfo) {
           tokenInfo = JSON.parse(tokenInfo);
-          log("  ->" + JSON.stringify(tokenInfo));
+          log("  -> " + JSON.stringify(tokenInfo));
           if (info.email == tokenInfo.email)
-            log("OK");
+            log("MANUAL TEST PASSED.");
           else
-            log("FAIL");
+            log("MANUAL TEST FAILED.");
         });
       });
     });
