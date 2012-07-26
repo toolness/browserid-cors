@@ -2,16 +2,34 @@
 <meta charset="utf-8">
 <title>browserid cors test</title>
 <img id="login" src="https://browserid.org/i/sign_in_blue.png">
+<pre id="log"></pre>
 <script src="http://zeptojs.com/zepto.min.js"></script>
 <script src="https://browserid.org/include.js"></script>
 <script>
+function log(text) {
+  $("#log")[0].textContent += text + '\n';
+}
+
 $(window).ready(function() {
   $("#login").click(function() {
     navigator.id.get(function(assertion) {
+      log("POST http://localhost:3000/auth");
       $.post("http://localhost:3000/auth", {
         assertion: assertion
-      }, function(req) {
-        console.log("boop", JSON.parse(req));
+      }, function(info) {
+        info = JSON.parse(info);
+        var url = "http://localhost:3000/token-info?accessToken=" +
+                  info.accessToken;
+        log("  -> " + JSON.stringify(info));
+        log("GET " + url);
+        $.get(url, function(tokenInfo) {
+          tokenInfo = JSON.parse(tokenInfo);
+          log("  ->" + JSON.stringify(tokenInfo));
+          if (info.email == tokenInfo.email)
+            log("OK");
+          else
+            log("FAIL");
+        });
       });
     });
   });
