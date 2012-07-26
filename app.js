@@ -1,10 +1,15 @@
 var express = require('express'),
     auth = require('./auth'),
     browserid = require('./browserid'),
-    app = express.createServer();
+    app = express.createServer(),
+    LocalTokenStorage = require('./local-token-storage'),
+    lts = LocalTokenStorage();
 
 app.use(express.bodyParser());
-app.post('/auth', auth.handler(browserid.verify));
+app.post('/auth', auth.handler({
+  verify: browserid.verify,
+  createToken: lts.createToken
+}));
 
 module.exports = app;
 

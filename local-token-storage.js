@@ -3,7 +3,7 @@ var tokens = require('./tokens');
 module.exports = function(options) {
   options = options || {};
   
-  var tokenLength = options.tokenLength || 8,
+  var tokenLength = options.tokenLength || 40,
       accessTokens = {};
   
   return {
