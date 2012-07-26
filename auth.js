@@ -14,7 +14,8 @@ exports.handler = function(options) {
         res.send(err, 400);
       else {
         options.createToken({
-          email: email
+          email: email,
+          origin: origin
         }, function(err, token) {
           if (err)
             return res.send('unable to generate token', 500);

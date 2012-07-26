@@ -18,7 +18,10 @@ function req(options, cb) {
       setTimeout(function() { verify(cb); }, 1);
     },
     createToken: function(info, cb) {
-      expect(info).to.eql({email: 'blah@blah.com'});
+      expect(info).to.eql({
+        email: 'blah@blah.com',
+        origin: 'http://foo.com'
+      });
       cb(options.createTokenError || null, "abcd");
     }
   }));
