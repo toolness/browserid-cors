@@ -8,13 +8,19 @@ var TEST_PORT = 4320;
 function req(options, cb) {
   var app = express.createServer();
   app.use(express.bodyParser());
-  app.post('/auth', auth.handler(function(audience, assertion, cb) {
-    var verify = options.verify || function(cb) {
-      cb(null, 'blah@blah.com');
-    };
-    expect(audience).to.be('http://foo.com');
-    expect(assertion).to.be('blah');
-    setTimeout(function() { verify(cb); }, 1);
+  app.post('/auth', auth.handler({
+    verify: function(audience, assertion, cb) {
+      var verify = options.verify || function(cb) {
+        cb(null, 'blah@blah.com');
+      };
+      expect(audience).to.be('http://foo.com');
+      expect(assertion).to.be('blah');
+      setTimeout(function() { verify(cb); }, 1);
+    },
+    createToken: function(info, cb) {
+      expect(info).to.eql({email: 'blah@blah.com'});
+      cb(options.createTokenError || null, "abcd");
+    }
   }));
   app.listen(TEST_PORT, function() {
     request({
@@ -52,6 +58,14 @@ describe('POST /auth', function(done) {
     });
   });
   
+  it('should return 500 if token creation fails', function(done) {
+    req({createTokenError: true}, function(error, response, body) {
+      expect(response.statusCode).to.be(500);
+      expect(body).to.be('unable to generate token');
+      done();
+    });
+  });
+  
   it('should support CORS', function(done) {
     req({}, function(error, response, body) {
       expect(response.headers['access-control-allow-origin']).to.be('*');
@@ -63,7 +77,8 @@ describe('POST /auth', function(done) {
     req({}, function(error, response, body) {
       expect(response.statusCode).to.be(200);
       expect(JSON.parse(body)).to.eql({
-        email: 'blah@blah.com'
+        email: 'blah@blah.com',
+        accessToken: 'abcd'
       });
       done();
     });
