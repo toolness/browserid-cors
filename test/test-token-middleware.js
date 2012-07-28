@@ -3,8 +3,9 @@ var expect = require('expect.js'),
     express = require('express'),
     tokenMiddleware = require('../lib/token-middleware');
 
-function req(method, accessToken, cb, constructor) {
+function req(method, accessToken, cb, constructor, useHeader) {
   var server = express.createServer();
+  var headers = useHeader ? {'X-Access-Token': 'abcd'} : {};
   server.use(express.bodyParser());
   server.use((constructor || tokenMiddleware.accessToken)({
     getTokenInfo: function(token, cb) {
@@ -37,7 +38,8 @@ function req(method, accessToken, cb, constructor) {
         url: url,
         form: {
           accessToken: accessToken
-        }
+        },
+        headers: headers
       }, finishReq);
     }
   });
@@ -62,6 +64,14 @@ describe("tokenMiddleware.requireAccessToken()", function() {
 });
 
 describe("tokenMiddleware.accessToken()", function() {
+  it("should work when token is passed in HTTP header", function(done) {
+    req('POST', 'abcd', function(error, response, body) {
+      expect(response.statusCode).to.be(200);
+      expect(JSON.parse(body)).to.eql({name: 'foo'});
+      done();
+    }, undefined, true);
+  });
+  
   it("should work when token is passed in POST requests", function(done) {
     req('POST', 'abcd', function(error, response, body) {
       expect(response.statusCode).to.be(200);
