@@ -2,6 +2,16 @@ var expect = require('expect.js'),
     LocalTokenStorage = require('../lib/local-token-storage.js');
 
 describe("LocalTokenStorage", function() {
+  it("should allow tokens to be created for testing", function(done) {
+    var lts = LocalTokenStorage();
+    lts.setTestingToken('abcd', {u: 1});
+    lts.getTokenInfo('abcd', function(err, info) {
+      expect(err).to.be(null);
+      expect(info).to.eql({u: 1});
+      done();
+    });
+  });
+  
   it("should create tokens", function(done) {
     var lts = LocalTokenStorage({tokenLength: 12});
     lts.createToken({blah: 1}, function(err, token) {
