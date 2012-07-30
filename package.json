@@ -2,7 +2,7 @@
   "name": "browserid-cors",
   "version": "0.0.1",
   "author": "Atul Varma <varmaa@gmail.com>",
-  "description": "browserid cors experiment",
+  "description": "Express middleware for creating BrowserID-authenticated, CORS-enabled REST APIs.",
   "scripts": {
     "test": "node_modules/.bin/mocha -R spec"
   },
