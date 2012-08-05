@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/toolness/browserid-cors.png?branch=master)](http://travis-ci.org/toolness/browserid-cors)
+
 This node module contains Express middleware for creating 
 BrowserID-authenticated, CORS-enabled REST APIs.
 
