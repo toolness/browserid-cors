@@ -18,9 +18,13 @@ favorites.org to provide backing services for the application:
 
 This software is still in an embryonic state. Use at your own risk.
 
+For an example of this middleware in use, see [git-browserid-cors][].
+
 ## Quick Start
 
     git clone git://github.com/toolness/browserid-cors.git
     cd browserid-cors
     npm install
     npm test
+
+  [git-browserid-cors]: https://github.com/toolness/git-browserid-cors
