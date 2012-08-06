@@ -1,7 +1,7 @@
 [![Build Status](https://secure.travis-ci.org/toolness/browserid-cors.png?branch=master)](http://travis-ci.org/toolness/browserid-cors)
 
 This node module contains Express middleware for creating 
-BrowserID-authenticated, CORS-enabled REST APIs.
+[BrowserID][]-authenticated, CORS-enabled REST APIs.
 
 The idea is that a static web page on any domain can send a BrowserID
 assertion to any number of CORS REST endpoints and receive a token back,
@@ -12,7 +12,8 @@ and the endpoint.
 
 This software is still in an embryonic state. Use at your own risk.
 
-For an example of this middleware in use, see [git-browserid-cors][].
+For an example of this middleware in use, see [git-browserid-cors][] or
+the trivially simple [manual test][].
 
 ## Example Scenario
 
@@ -50,3 +51,5 @@ actually exists (not yet, anyway).
     npm test
 
   [git-browserid-cors]: https://github.com/toolness/git-browserid-cors
+  [manual test]: https://github.com/toolness/browserid-cors/tree/master/test/manual
+  [BrowserID]: http://browserid.org
