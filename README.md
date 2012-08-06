@@ -20,7 +20,7 @@ For illustration, here's an example of a front-end at mysite.org
 communicating with two unrelated APIs at comments.org and
 favorites.org to provide backing services for the application:
 
-<center><img src="http://u.toolness.org/eawjr"></center>
+<img src="http://u.toolness.org/eawjr">
 
 The page at mysite.org might include the following JavaScript for 
 logging the user in:
