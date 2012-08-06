@@ -44,6 +44,25 @@ navigator.id.get(function(assertion) {
 }
 ```
 
+On the server side, comments.org might consist of something akin to the
+following:
+
+```javascript
+var express = require('express'),
+    BrowserIDCORS = require('browserid-cors'),
+    app = express.createServer(),
+    bic = BrowserIDCORS();
+
+app.use(express.bodyParser());
+app.use(bic.fullCORS); // Shortcut for making our whole site CORS-friendly.
+app.post('/token', bic.handleTokenRequest);
+app.post('/comment', bic.requireAccessToken, function(req, res) {
+  /* Use req.user.email to get the current user's email address, and
+   * req.user.origin to get the origin of the site making this request
+   * on the user's behalf. */
+});
+```
+
 ## Quick Start
 
     git clone git://github.com/toolness/browserid-cors.git
