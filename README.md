@@ -27,21 +27,22 @@ The page at mysite.org might include the following JavaScript for
 logging the user in:
 
 ```javascript
-var CommentsAPI = BrowserIDCORS("https://comments.org");
-var FavoritesAPI = BrowserIDCORS("https://favorites.org");
-
 navigator.id.get(function(assertion) {
-  CommentsAPI.authorize(assertion, function(token) {
-    /* Use token for future interactions w/ this API. */
+  $.post("https://comments.org/token", {
+    assertion: assertion
+  }, function(info) {
+    /* Use info.accessToken for future interactions w/ the comments API
+     * by either setting the 'X-Access-Token' header on requests or passing
+     * 'accessToken' as a GET/POST parameter. */
   });
-  FavoritesAPI.authorize(assertion, function(token) {
-    /* Use token for future interactions w/ this API. */
+
+  $.post("https://favorites.org/token", {
+    assertion: assertion
+  }, function(info) {
+    /* Use info.accessToken for future interactions w/ the favorites API. */
   });
 }
 ```
-
-Note that the above snippet is pseudocode; no `BrowserIDCORS` constructor
-actually exists (not yet, anyway).
 
 ## Quick Start
 
